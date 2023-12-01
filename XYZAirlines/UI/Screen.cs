@@ -10,7 +10,9 @@ public abstract class Screen
     
     protected Screen previousScreen;
     protected string title;
-    
+    private string errorMessage;
+    private string notificationMessage;
+
     public Screen(string title)
     {
         previousScreen = null;
@@ -31,6 +33,9 @@ public abstract class Screen
     {
         displayHeader();
         displayBody();
+        displayMessages();
+        errorMessage = null;
+        notificationMessage = null;
         displayInputPrompt();
         var input = getInput();
         var result = handleInput(input);
@@ -42,6 +47,29 @@ public abstract class Screen
         return result;
     }
 
+    protected virtual void displayMessages()
+    {
+        if(!string.IsNullOrEmpty(errorMessage))
+        {
+            var color = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(errorMessage);
+            Console.ForegroundColor = color;
+            return;
+        }
+        if(!string.IsNullOrEmpty(notificationMessage))
+        {
+            var color = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(notificationMessage);
+            Console.ForegroundColor = color;
+            return;
+        }
+
+        Console.WriteLine();
+        
+    }
+
     public Screen goBack()
     {
         return previousScreen;
@@ -50,6 +78,16 @@ public abstract class Screen
     public void setPreviousScreen(Screen previousScreen)
     {
         this.previousScreen = previousScreen;
+    }
+    
+    public void setErrorMessage(string errorMessage)
+    {
+        this.errorMessage = errorMessage;
+    }
+    
+    public void setNotificationMessage(string notificationMessage)
+    {
+        this.notificationMessage = notificationMessage;
     }
 
 }
