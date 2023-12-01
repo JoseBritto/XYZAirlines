@@ -2,29 +2,6 @@ namespace XYZAirlines.Models;
 
 public class Flight
 {
-    /*
-     * +----------------------------------------+
-       |                Flight                  |
-       +----------------------------------------+
-       | - flightNumber: int                    |
-       | - origin: String                       |
-       | - destination: String                  |
-       | - maxSeats: int                        |
-       | - passengers: Customer[]               |
-       +----------------------------------------+
-       | + Flight(flightNumber: int, origin: String, destination: String, maxSeats: int) |
-       | + getFlightNumber(): int               |
-       | + getOrigin(): String                  |
-       | + getDestination(): String             |
-       | + getMaxSeats(): int                   |
-       | + getPassengers(): List<Customer>      |
-       | + addPassenger(customer: Customer): boolean |
-       | + removePassenger(customer: Customer): boolean |
-       | + toString(): String                   |
-       +----------------------------------------+
-       
-     */
-    
     private int flightNumber;
     private string origin;
     private string destination;
