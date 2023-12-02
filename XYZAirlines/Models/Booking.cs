@@ -2,24 +2,6 @@ namespace XYZAirlines.Models;
 
 public class Booking
 {
-    /*
-     * +----------------------------------------+
-       |              Booking                   |
-       +----------------------------------------+
-       | - bookingNumber: int                   |
-       | - date: String                         |
-       | - flight: Flight                       |
-       | - customer: Customer                   |
-       +----------------------------------------+
-       | + Booking(date: String, flight: Flight, customer: Customer) |
-       | + getBookingNumber(): int              |
-       | + getDate(): String                    |
-       | + getFlight(): Flight                  |
-       | + getCustomer(): Customer              |
-       | + toString(): String                   |
-       +----------------------------------------+
-     */
-    
     private int bookingNumber;
     private string date;
     private Flight flight;
@@ -57,7 +39,19 @@ public class Booking
     {
         return $"Booking Number: {this.bookingNumber}\n" +
                $"Date: {this.date}\n" +
-               $"Flight: {this.flight.getFlightNumber()}\n" +
-               $"Customer: {this.customer.getCustomerId()}";
+               $"Flight: {flight}\n" +
+               $"Customer: {this.customer.getFirstName()} {this.customer.getLastName()}";
     }
+
+    public void setDate(string date)
+    {
+        this.date = date;
+    }
+
+    public string getSaveString()
+    {
+        return $"{this.bookingNumber},{this.date},{this.flight.getFlightNumber()},{this.customer.getCustomerId()}";
+    }
+    
+    
 }

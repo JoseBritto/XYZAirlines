@@ -34,7 +34,7 @@ public class AddFlightScreen1 : AddFlightScreen
 
     public override Screen handleInput(string input)
     {
-        if(Program.Coordinator.getFlightManager().canAddMoreFlights())
+        if(!Program.Coordinator.getFlightManager().canAddMoreFlights())
         {
             previousScreen.setErrorMessage("Cannot add more flights. Maximum number of flights reached.");
             return previousScreen;

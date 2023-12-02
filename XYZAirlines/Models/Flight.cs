@@ -6,7 +6,6 @@ public class Flight
     private string origin;
     private string destination;
     private int maxSeats;
-    private Booking[] bookings;
     private int numPassengers;
     
     public Flight(int flightNumber, string origin, string destination, int maxSeats)
@@ -15,8 +14,16 @@ public class Flight
         this.origin = origin;
         this.destination = destination;
         this.maxSeats = maxSeats;
-        this.bookings = new Booking[maxSeats];
         this.numPassengers = 0;
+    }
+    
+    public Flight(int flightNumber, string origin, string destination, int maxSeats, int numPassengers)
+    {
+        this.flightNumber = flightNumber;
+        this.origin = origin;
+        this.destination = destination;
+        this.maxSeats = maxSeats;
+        this.numPassengers = numPassengers;
     }
     
     public int getFlightNumber()
@@ -39,50 +46,13 @@ public class Flight
         return this.maxSeats;
     }
     
-    public Booking[] getBookings()
+    public void incrementNumPassengers()
     {
-        return this.bookings;
-    }
-    
-    public bool addBooking(Booking booking)
-    {
-        if (this.numPassengers >= this.maxSeats)
-        {
-            return false;
-        }
-        this.bookings[this.numPassengers] = booking;
         this.numPassengers++;
-        return true;
     }
-    
-    public bool removeBooking(int bookingNumber)
+    public void decrementNumPassengers()
     {
-        for (int i = 0; i < this.numPassengers; i++)
-        {
-            if (this.bookings[i].getBookingNumber() == bookingNumber)
-            {
-                this.bookings[i] = this.bookings[this.numPassengers - 1];
-                this.bookings[this.numPassengers - 1] = null;
-                this.numPassengers--;
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public bool removePassenger(int customerID)
-    {
-        for (int i = 0; i < this.numPassengers; i++)
-        {
-            if (this.bookings[i].getCustomer().getCustomerId() == customerID)
-            {
-                this.bookings[i] = this.bookings[this.numPassengers - 1];
-                this.bookings[this.numPassengers - 1] = null;
-                this.numPassengers--;
-                return true;
-            }
-        }
-        return false;
+        this.numPassengers--;
     }
     
     public int getNumPassengers()
@@ -95,4 +65,23 @@ public class Flight
         return $"Flight {this.flightNumber} from {this.origin} to {this.destination} ({this.numPassengers}/{this.maxSeats} passengers)";
     }
 
+    public void setOrigin(string origin)
+    {
+        this.origin = origin;
+    }
+
+    public void setDestination(string destination)
+    {
+        this.destination = destination;
+    }
+
+    public void setMaxSeats(int seats)
+    {
+        this.maxSeats = seats;
+    }
+
+    public string getSaveString()
+    {
+        return $"{this.flightNumber},{this.origin},{this.destination},{this.maxSeats},{this.numPassengers}";
+    }
 }

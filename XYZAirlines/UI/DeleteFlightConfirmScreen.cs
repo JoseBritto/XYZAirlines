@@ -37,6 +37,7 @@ public class DeleteFlightConfirmScreen : Screen
                 previousScreen.setErrorMessage($"Failed to delete Flight {flight.getFlightNumber()}");
                 return previousScreen;
             }
+            Program.Coordinator.save();
             previousScreen.setNotificationMessage($"Flight {flight.getFlightNumber()} deleted successfully.");
             return previousScreen;
         }

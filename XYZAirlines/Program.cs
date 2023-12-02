@@ -2,6 +2,7 @@
 using XYZAirlines.UI;
 using XYZAirlines.UI.AddCustomerScreens;
 using XYZAirlines.UI.AddFlightScreens;
+using XYZAirlines.UI.CreateBookingScreens;
 
 internal class Program
 {
@@ -13,6 +14,7 @@ internal class Program
         Console.WriteLine("XYZ Airlines Flight Booking System");
         Console.WriteLine("==================================");
 
+        Coordinator.load();
         MenuScreen menu = BuildMenus();
 
         Screen screen = menu;
@@ -50,8 +52,8 @@ internal class Program
             viewFlightsScreen.setPreviousScreen(flightMenu);
             deleteFlightsScreen.setPreviousScreen(flightMenu);
             
-            Screen bookFlightScreen = null;
-            Screen viewBookingsScreen = null;
+            Screen bookFlightScreen = new CreateBookingScreen1();
+            Screen viewBookingsScreen = new ViewAllBookingsScreen();
             Screen deleteBookingsScreen = null;
             MenuScreen bookingMenu = new MenuScreen("Bookings Menu",new Option[] {
                 new Option("Book Flight", bookFlightScreen),
@@ -59,6 +61,9 @@ internal class Program
                 new Option("Delete Bookings", deleteBookingsScreen),
             });
     
+            bookFlightScreen.setPreviousScreen(bookingMenu);
+            viewBookingsScreen.setPreviousScreen(bookingMenu);
+            
             Screen exitScreen = new ExitConfirmationScreen();
             MenuScreen mainMenu = new MenuScreen("Main Menu", new Option[] {
                 new Option("Customers", customerMenu),

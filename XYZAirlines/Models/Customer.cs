@@ -2,32 +2,12 @@ namespace XYZAirlines.Models;
 
 public class Customer
 {
-    /*
-     * +----------------------------------------+
-       |              Customer                  |
-       +----------------------------------------+
-       | - customerID: int                      |
-       | - firstName: String                    |
-       | - lastName: String                     |
-       | - phone: String                        |
-       | - numBookings: int                     |
-       +----------------------------------------+
-       | + Customer(firstName: String, lastName: String, phone: String) |
-       | + getCustomerID(): int                 |
-       | + getFirstName(): String               |
-       | + getLastName(): String                |
-       | + getPhone(): String                   |
-       | + incrementNumBookings(): void         |
-       | + toString(): String                   |
-       +----------------------------------------+
-     */
-    
     private int customerId;
     private string firstName;
     private string lastName;
     private string phone;
     private int numBookings;
-    
+
     public Customer(int id, string firstName, string lastName, string phone)
     {
         this.customerId = id;
@@ -35,6 +15,14 @@ public class Customer
         this.lastName = lastName;
         this.phone = phone;
         this.numBookings = 0;
+    }
+    public Customer(int id, string firstName, string lastName, string phone, int numBookings)
+    {
+        this.customerId = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.numBookings = numBookings;
     }
     
     public int getCustomerId()
@@ -72,6 +60,7 @@ public class Customer
         return this.numBookings;
     }
     
+    
     public override string ToString()
     {
         return $"Customer ID: {this.customerId}\n" +
@@ -81,8 +70,33 @@ public class Customer
                $"Number of Bookings: {this.numBookings}";
     }
     
+    public string getShortString()
+    {
+        return $"{customerId}. {firstName} {lastName} ({phone})";
+    }
+    
     public string getshortString()
     {
         return $"{customerId}. {firstName} {lastName} ({phone})";
+    }
+
+    public void setFirstName(string fName)
+    {
+        this.firstName = fName;
+    }
+    
+    public void setLastName(string lName)
+    {
+        this.lastName = lName;
+    }
+    
+    public void setPhone(string phone)
+    {
+        this.phone = phone;
+    }
+
+    public string getSaveString()
+    {
+        return $"{this.customerId},{this.firstName},{this.lastName},{this.phone},{this.numBookings}";
     }
 }

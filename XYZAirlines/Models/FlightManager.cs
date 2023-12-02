@@ -1,6 +1,6 @@
 namespace XYZAirlines.Models;
 
-public class FlightManager
+public class FlightManager : Saveable
 {
     
     private Flight[] flights;
@@ -72,6 +72,8 @@ public class FlightManager
         for (var i = 0; i < this.numFlights; i++)
         {
             var flight = this.flights[i];
+            if(flight.getNumPassengers() > 0)
+                return false;
             if (flight.getFlightNumber() == flightNumber)
             {
                 if(flight.getNumPassengers() != 0)
@@ -119,5 +121,52 @@ public class FlightManager
     public bool canAddMoreFlights()
     {
         return this.numFlights < this.flights.Length;
+    }
+
+    public bool updateFlight(int flightNumber, string origin, string destination, int maxSeats)
+    {
+        var flight = getFlight(flightNumber);
+        if(flight == null)
+            return false;
+        flight.setOrigin(origin);
+        flight.setDestination(destination);
+        flight.setMaxSeats(maxSeats);
+        return true;
+    }
+
+    public string getSaveString()
+    {
+        string result = "";
+        for (var i = 0; i < this.numFlights; i++)
+        {
+            var flight = this.flights[i];
+            result += flight.getSaveString() + "\n";
+        }
+        return result;
+    }
+    
+    public bool loadSaveString(string saveString, Flight[] existingFlights, Customer[] existingCustomers)
+    {
+        var lines = saveString.Split("\n");
+        foreach (var line in lines)
+        {
+            if (line == "")
+                continue;
+            var values = line.Split(",");
+            var flightNumber = int.Parse(values[0]);
+            var origin = values[1];
+            var destination = values[2];
+            var maxSeats = int.Parse(values[3]);
+            var numPassengers = int.Parse(values[4]);
+            var flight = new Flight(flightNumber, origin, destination, maxSeats, numPassengers);
+            this.flights[this.numFlights] = flight;
+            this.numFlights++;
+        }
+        return true;
+    }
+
+    public string getSaveIdentifier()
+    {
+        return "flights";
     }
 }

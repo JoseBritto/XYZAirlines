@@ -55,6 +55,7 @@ public class AddFlightScreen5 : AddFlightScreen
                     previousScreen.setErrorMessage("Failed to add flight.");
                     return previousScreen;
                 }
+                Program.Coordinator.save();
                 previousScreen.setNotificationMessage("Added successfully: " + Program.Coordinator.getFlightManager().getFlight(flightNum));
                 return previousScreen;
             case BACK:

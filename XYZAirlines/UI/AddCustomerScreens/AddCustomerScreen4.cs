@@ -56,6 +56,7 @@ public class AddCustomerScreen4 : AddCustomerScreen
                     previousScreen.setErrorMessage("Failed to add customer.");
                     return previousScreen;
                 }
+                Program.Coordinator.save();
                 previousScreen.setNotificationMessage($"Customer {firstName} {lastName} added successfully");
                 return previousScreen;
             case BACK:

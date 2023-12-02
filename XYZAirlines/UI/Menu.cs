@@ -1,5 +1,3 @@
-using XYZAirlines.Helpers;
-
 namespace XYZAirlines.UI;
 
 public class MenuScreen : Screen
