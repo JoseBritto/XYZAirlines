@@ -4,12 +4,12 @@ public class DeleteFlightScreen : TextInputScreen
 {
     public DeleteFlightScreen() : base("Delete Flight")
     {
-        setNotificationMessage("Enter \"cancel\" to return to discard operation.");
+        setNotificationMessage("Enter \"cancel\" to discard operation.");
     }
 
     public override void displayBody()
     {
-        Console.WriteLine(Program.Coordinator.displayAllFlights());
+        Console.WriteLine(Program.coordinator.displayAllFlights());
     }
 
     public override void displayInputPrompt()
@@ -25,7 +25,12 @@ public class DeleteFlightScreen : TextInputScreen
             return INVALID;
         }
         input = input.Trim();
+        if(handleNavigationInput(input) != null)
+        {
+            return handleNavigationInput(input);
+        }
         return int.TryParse(input, out var flightNumber) ? input : INVALID;
+        
     }
 
     public override Screen handleInput(string input)
@@ -39,18 +44,18 @@ public class DeleteFlightScreen : TextInputScreen
             return this;
         }
         var flightNumber = int.Parse(input);
-        if(Program.Coordinator.flightNumberExists(flightNumber) == false)
+        if(Program.coordinator.flightNumberExists(flightNumber) == false)
         {
             setErrorMessage($"Flight {flightNumber} not found");
             return this;
         }
-        if(Program.Coordinator.getFlightManager().flightHasPassengers(flightNumber))
+        if(Program.coordinator.getFlightManager().flightHasPassengers(flightNumber))
         {
             setErrorMessage($"Flight {flightNumber} has passengers. Please remove all passengers before deleting the flight.");
             return this;
         }
         
-        var flight = Program.Coordinator.getFlightManager().getFlight(flightNumber);
+        var flight = Program.coordinator.getFlightManager().getFlight(flightNumber);
         var confirm = new DeleteFlightConfirmScreen(flight);
         confirm.setPreviousScreen(previousScreen);
         return confirm;

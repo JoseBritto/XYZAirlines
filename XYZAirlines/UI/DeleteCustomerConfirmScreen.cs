@@ -35,12 +35,12 @@ public class DeleteCustomerConfirmScreen : Screen
     {
         if (input == ENTER)
         {
-            if(!Program.Coordinator.getCustomerManager().removeCustomer(customer.getCustomerId()))
+            if(!Program.coordinator.getCustomerManager().removeCustomer(customer.getCustomerId()))
             {
                 previousScreen.setErrorMessage($"Failed to delete Customer with id {customer.getCustomerId()}");
                 return previousScreen;
             }
-            Program.Coordinator.save();
+            Program.coordinator.save();
             previousScreen.setNotificationMessage($"Customer {customer.getCustomerId()} deleted successfully.");
             return previousScreen;
         }

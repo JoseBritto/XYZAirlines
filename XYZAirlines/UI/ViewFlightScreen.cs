@@ -8,22 +8,40 @@ public class ViewFlightScreen : Screen
 
     public override void displayBody()
     {
-        Console.WriteLine(Program.Coordinator.displayAllFlights());
+        Console.WriteLine(Program.coordinator.displayAllFlights());
     }
 
     public override void displayInputPrompt()
     {
-        Console.Write("Press any key to return to continue: ");
+        Console.Write("Enter flight number to view more details. [Enter] to go back: ");
     }
 
     public override string getInput()
     {
-        Console.ReadKey();
-        return ENTER;
+        var input = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(input))
+            return ENTER;
+        
+        if (!int.TryParse(input, out var flightNumber) || !Program.coordinator.flightNumberExists(flightNumber))
+        {
+            return INVALID;
+        }
+        
+        return input;
     }
 
     public override Screen handleInput(string input)
     {
-        return previousScreen;
+        if(input == INVALID)
+        {
+            setErrorMessage("Invalid flight number.");
+            return this;
+        }
+        if (input == ENTER)
+            return this.goBack();
+        
+        var flightNumber = int.Parse(input);
+        var flight = Program.coordinator.getFlightManager().getFlight(flightNumber);
+        return new ViewFlightDetailsScreen(flight, previousScreen);
     }
 }

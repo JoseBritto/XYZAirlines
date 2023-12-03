@@ -8,7 +8,7 @@ public class DeleteCustomerScreen : Screen
     public override void displayBody()
     {
         Console.WriteLine("Select a customer to delete:");
-        foreach (var customer in Program.Coordinator.getCustomerManager().getCustomers())
+        foreach (var customer in Program.coordinator.getCustomerManager().getCustomers())
         {
             Console.WriteLine(customer.getshortString());
         }
@@ -37,7 +37,7 @@ public class DeleteCustomerScreen : Screen
             return this;
         }
         var customerID = int.Parse(input);
-        var customer = Program.Coordinator.getCustomerManager().getCustomer(customerID);
+        var customer = Program.coordinator.getCustomerManager().getCustomer(customerID);
         if (customer == null)
         {
             setErrorMessage("Invalid customer ID");

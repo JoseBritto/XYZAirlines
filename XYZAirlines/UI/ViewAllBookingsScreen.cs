@@ -8,7 +8,7 @@ public class ViewAllBookingsScreen : Screen
 
     public override void displayBody()
     {
-        Console.WriteLine(Program.Coordinator.displayAllBookings());
+        Console.WriteLine(Program.coordinator.displayAllBookings());
     }
 
     public override void displayInputPrompt()

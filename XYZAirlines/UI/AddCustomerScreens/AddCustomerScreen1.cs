@@ -9,7 +9,7 @@ public class AddCustomerScreen1 : AddCustomerScreen
 
     public override void displayInputPrompt()
     {
-        Console.Write("Enter customer first name (optional): ");
+        Console.Write("Enter customer first name: ");
     }
 
     public override string getInput()
@@ -17,7 +17,7 @@ public class AddCustomerScreen1 : AddCustomerScreen
         var input = Console.ReadLine();
         if (string.IsNullOrWhiteSpace(input))
         {
-            input = "N/A";
+            return INVALID;
         }
         input = input.Trim();
         return input;
@@ -25,7 +25,13 @@ public class AddCustomerScreen1 : AddCustomerScreen
     
     public override Screen handleInput(string input)
     {
-        if (!Program.Coordinator.getCustomerManager().canAddMoreCustomers())
+        if(input == INVALID)
+        {
+            setErrorMessage("Invalid first name.");
+            return this;
+        }
+        
+        if (!Program.coordinator.getCustomerManager().canAddMoreCustomers())
         {
             previousScreen.setErrorMessage("Cannot add more customers. Maximum number of customers reached.");
             return previousScreen;

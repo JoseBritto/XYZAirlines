@@ -14,9 +14,9 @@ public class CreateBookingScreen3 : Screen
 
     public override void displayBody()
     {
-        var flight = Program.Coordinator.getFlight(flightNum);
+        var flight = Program.coordinator.getFlight(flightNum);
         Console.WriteLine($"Flight: {flight}");
-        var customer = Program.Coordinator.getCustomer(customerId);
+        var customer = Program.coordinator.getCustomer(customerId);
         Console.WriteLine($"Customer: {customer.getshortString()}");
     }
 
@@ -39,9 +39,9 @@ public class CreateBookingScreen3 : Screen
     {
         if(input == ENTER)
         {
-            if(Program.Coordinator.createBoooking(customerId, flightNum))
+            if(Program.coordinator.createBoooking(customerId, flightNum))
             {
-                Program.Coordinator.save();
+                Program.coordinator.save();
                 previousScreen.setNotificationMessage("Booking created.");
                 return previousScreen;
             }

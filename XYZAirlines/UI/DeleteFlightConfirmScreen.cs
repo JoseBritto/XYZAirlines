@@ -32,12 +32,12 @@ public class DeleteFlightConfirmScreen : Screen
     {
         if (input == ENTER)
         {
-            if(!Program.Coordinator.getFlightManager().removeFlight(flight.getFlightNumber()))
+            if(!Program.coordinator.getFlightManager().removeFlight(flight.getFlightNumber()))
             {
                 previousScreen.setErrorMessage($"Failed to delete Flight {flight.getFlightNumber()}");
                 return previousScreen;
             }
-            Program.Coordinator.save();
+            Program.coordinator.save();
             previousScreen.setNotificationMessage($"Flight {flight.getFlightNumber()} deleted successfully.");
             return previousScreen;
         }

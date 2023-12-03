@@ -49,14 +49,14 @@ public class AddFlightScreen5 : AddFlightScreen
         switch (input)
         {
             case ENTER:
-                bool result = Program.Coordinator.addFlight(flightNum, origin, destination, capacity);
+                bool result = Program.coordinator.addFlight(flightNum, origin, destination, capacity);
                 if (!result)
                 {
                     previousScreen.setErrorMessage("Failed to add flight.");
                     return previousScreen;
                 }
-                Program.Coordinator.save();
-                previousScreen.setNotificationMessage("Added successfully: " + Program.Coordinator.getFlightManager().getFlight(flightNum));
+                Program.coordinator.save();
+                previousScreen.setNotificationMessage("Added successfully: " + Program.coordinator.getFlightManager().getFlight(flightNum));
                 return previousScreen;
             case BACK:
                 return previousScreen;

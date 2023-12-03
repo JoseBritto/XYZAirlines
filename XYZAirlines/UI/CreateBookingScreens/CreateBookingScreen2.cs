@@ -13,7 +13,7 @@ public class CreateBookingScreen2 : TextInputScreen
     
     public override void displayBody()
     {
-        Program.Coordinator.displayAllCustomers();
+        Program.coordinator.displayAllCustomers();
     }
 
     public override void displayInputPrompt()
@@ -32,7 +32,7 @@ public class CreateBookingScreen2 : TextInputScreen
         {
             return INVALID;
         }
-        return int.TryParse(input, out var customerId) && Program.Coordinator.customerExists(customerId) ? input : INVALID;
+        return int.TryParse(input, out var customerId) && Program.coordinator.customerExists(customerId) ? input : INVALID;
     }
 
     public override Screen handleInput(string input)

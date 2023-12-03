@@ -126,13 +126,12 @@ public class Coordinator
     public string displayAllBookingsForFlight(Flight flight)
     {
         var bookings = this.bookingManager.getBookingsForFlight(flight);
-        var result = "*--------- All Bookings ---------------*\n";
+        var result = "\n";
         foreach (var booking in bookings)
         {
             result += booking + "\n";
-            result += "*-------------------------------------*\n";
+            result += "\n";
         }
-        result += "*-------------------------------------*";
         return result;
     }
     

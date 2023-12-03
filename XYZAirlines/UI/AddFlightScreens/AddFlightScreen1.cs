@@ -34,7 +34,7 @@ public class AddFlightScreen1 : AddFlightScreen
 
     public override Screen handleInput(string input)
     {
-        if(!Program.Coordinator.getFlightManager().canAddMoreFlights())
+        if(!Program.coordinator.getFlightManager().canAddMoreFlights())
         {
             previousScreen.setErrorMessage("Cannot add more flights. Maximum number of flights reached.");
             return previousScreen;
@@ -49,7 +49,7 @@ public class AddFlightScreen1 : AddFlightScreen
             return base.handleInput(input);
         }
         var flightNumber = int.Parse(input);
-        if(Program.Coordinator.flightNumberExists(flightNumber))
+        if(Program.coordinator.flightNumberExists(flightNumber))
         {
             setErrorMessage("Flight number already exists. Please enter a different flight number.");
             return this;

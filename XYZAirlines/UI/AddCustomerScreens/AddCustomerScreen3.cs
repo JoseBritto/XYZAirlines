@@ -33,6 +33,12 @@ public class AddCustomerScreen3 : AddCustomerScreen
             return INVALID;
         }
         input = input.Trim();
+        
+        if(base.handleNavigationInput(input) != null)
+        {
+            return base.handleNavigationInput(input);
+        }
+        
         var regex = new Regex(@"^(\+)?(\d{1,2})?(\s)?((\(\d{3}\))|(\d{3}))(\s|-)?(\d{3})(\s|-)?(\d{4})$");
         if (!regex.IsMatch(input))
         {

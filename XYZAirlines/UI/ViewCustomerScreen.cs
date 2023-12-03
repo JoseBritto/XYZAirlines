@@ -8,7 +8,7 @@ public class ViewCustomerScreen : Screen
 
     public override void displayBody()
     {
-        Console.WriteLine(Program.Coordinator.displayAllCustomers());
+        Console.WriteLine(Program.coordinator.displayAllCustomers());
     }
 
     public override void displayInputPrompt()

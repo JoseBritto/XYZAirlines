@@ -8,7 +8,7 @@ public class CreateBookingScreen1 : TextInputScreen
 
     public override void displayBody()
     {
-        Program.Coordinator.displayAllFlights();
+        Program.coordinator.displayAllFlights();
     }
 
     public override void displayInputPrompt()
@@ -27,7 +27,7 @@ public class CreateBookingScreen1 : TextInputScreen
         {
             return INVALID;
         }
-        return int.TryParse(input, out var flightNumber) && Program.Coordinator.flightNumberExists(flightNumber) ? input : INVALID;
+        return int.TryParse(input, out var flightNumber) && Program.coordinator.flightNumberExists(flightNumber) ? input : INVALID;
     }
 
     protected override string getCancelMessage()

@@ -50,13 +50,13 @@ public class AddCustomerScreen4 : AddCustomerScreen
                     firstName = "";
                 if(lastName == "N/A")
                     lastName = "";
-                bool result = Program.Coordinator.addCustomer(firstName, lastName, phoneNumber);
+                bool result = Program.coordinator.addCustomer(firstName, lastName, phoneNumber);
                 if(result == false)
                 {
-                    previousScreen.setErrorMessage("Failed to add customer.");
+                    previousScreen.setErrorMessage("Customer already exists!");
                     return previousScreen;
                 }
-                Program.Coordinator.save();
+                Program.coordinator.save();
                 previousScreen.setNotificationMessage($"Customer {firstName} {lastName} added successfully");
                 return previousScreen;
             case BACK:
